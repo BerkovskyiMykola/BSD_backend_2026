@@ -24,3 +24,46 @@ Implement a Web service (Kestrel, .NET API), and expose the implemented function
 ### Bonus Task
 
 Deploy your Web service locally with Docker.
+
+## Solution
+
+### ConsoleApp
+
+The application is configured via `appsettings.json`.
+
+#### Structure
+
+```json
+{
+  "Take": 3,
+  "OrderType": "Buy",
+  "TargetAmount": 4,
+  "Balances": {
+    "1": 10000,
+    "2": 5000,
+    "3": 2050
+  }
+}
+```
+
+#### Settings
+
+### **Take**
+- **Type:** `int`  
+- **Description:** Limits how many order book levels are loaded from the data source.
+
+### **OrderType**
+- **Type:** `string` (`Buy | Sell`)  
+- **Description:**  
+  - **Buy** – builds an buy execution plan.  
+  - **Sell** – builds an sell execution plan using bids.
+
+### **TargetAmount**
+- **Type:** `decimal`  
+- **Description:** The total amount to execute in the order plan.
+
+### **Balances**
+- **Type:** `dictionary<int, decimal>`  
+- **Description:** Available user balances per cryptoexchange.  
+  - **Keys** represent cryptoexchange identifiers.  
+  - **Values** represent available EUR balance.

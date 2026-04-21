@@ -5,13 +5,13 @@ namespace Shared;
 
 public static class ExchangeLoader
 {
-    public static async Task<(IReadOnlyList<BidEntry> Bids, IReadOnlyList<AskEntry> Asks)> LoadFlatAsync(
+    public static async Task<(IReadOnlyList<OrderEntry> Bids, IReadOnlyList<OrderEntry> Asks)> LoadFlatAsync(
         string path,
         int take,
         CancellationToken cancellationToken = default)
     {
-        var bids = new List<BidEntry>();
-        var asks = new List<AskEntry>();
+        var bids = new List<OrderEntry>();
+        var asks = new List<OrderEntry>();
         var id = 1;
 
         await foreach (var line in File.ReadLinesAsync(path, cancellationToken))
@@ -37,12 +37,12 @@ public static class ExchangeLoader
 
             foreach (var b in root.Bids)
             {
-                bids.Add(new BidEntry(id, b.Order.Price, b.Order.Amount));
+                bids.Add(new OrderEntry(id, b.Order.Price, b.Order.Amount));
             }
 
             foreach (var a in root.Asks)
             {
-                asks.Add(new AskEntry(id, a.Order.Price, a.Order.Amount));
+                asks.Add(new OrderEntry(id, a.Order.Price, a.Order.Amount));
             }
 
             id++;

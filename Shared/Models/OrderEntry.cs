@@ -1,6 +1,6 @@
 ﻿namespace Shared.Models;
 
-public sealed record BidEntry(
+public sealed record OrderEntry(
     int ExchangeId,
     decimal Price,
     decimal Amount);

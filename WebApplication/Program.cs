@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi;
 using Shared;
 using Shared.Models;
 using System.Diagnostics;
@@ -9,6 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
     options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Execution Plan API", Version = "v1" });
 });
 
 var appSettings = builder.Configuration.Get<AppSettings>()!;
@@ -22,6 +29,13 @@ builder.Services.AddSingleton(new BuyExecutionPlanBuilder(asks));
 builder.Services.AddSingleton(new SellExecutionPlanBuilder(bids));
 
 var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Execution Plan API v1");
+    options.RoutePrefix = string.Empty;
+});
 
 app.MapPost("/execution-plan", (
     [FromBody] ExecutionPlanRequest request,

@@ -5,6 +5,9 @@
     <File Path="order_books_data" />
   </Folder>
   <Project Path="ConsoleApp/ConsoleApp.csproj" />
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
   <Project Path="Shared/Shared.csproj" />
   <Project Path="WebApplication/WebApplication.csproj" />
 </Solution>

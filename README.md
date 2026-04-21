@@ -48,22 +48,86 @@ The application is configured via `appsettings.json`.
 
 #### Settings
 
-### **Take**
+##### **Take**
 - **Type:** `int`  
 - **Description:** Limits how many order book levels are loaded from the data source.
 
-### **OrderType**
+##### **OrderType**
 - **Type:** `string` (`Buy | Sell`)  
 - **Description:**  
   - **Buy** – builds an buy execution plan.  
   - **Sell** – builds an sell execution plan using bids.
 
-### **TargetAmount**
+##### **TargetAmount**
 - **Type:** `decimal`  
 - **Description:** The total amount to execute in the order plan.
 
-### **Balances**
+##### **Balances**
 - **Type:** `dictionary<int, decimal>`  
 - **Description:** Available user balances per cryptoexchange.  
   - **Keys** represent cryptoexchange identifiers.  
   - **Values** represent available EUR balance.
+
+### WebApplication
+
+The application is configured via `appsettings.json`.
+
+#### Structure
+
+```json
+{
+  "Take": 3,
+  "Balances": {
+    "1": 10000,
+    "2": 5000,
+    "3": 2050
+  }
+}
+```
+
+#### Settings
+
+##### **Take**
+- **Type:** `int`  
+- **Description:** Limits how many order book levels are loaded from the data source.
+
+##### **Balances**
+- **Type:** `dictionary<int, decimal>`  
+- **Description:** Available user balances per cryptoexchange.  
+  - **Keys** represent cryptoexchange identifiers.  
+  - **Values** represent available EUR balance.
+
+#### Endpoints
+
+##### **POST /execution-plan**
+
+Generates the best execution plan for buying or selling a specified amount of BTC across multiple cryptoexchanges.
+
+**Request Body:**
+
+```json
+{
+  "orderType": "buy",
+  "targetAmount": 4
+}
+```
+
+**Parameters:**
+- **orderType** (`string`): `"buy"` or `"sell"` - The type of order to execute.
+- **targetAmount** (`decimal`): The total amount of BTC to buy or sell.
+
+**Example Request:**
+
+```bash
+curl --location 'http://localhost:5124/execution-plan' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "orderType": "buy",
+    "targetAmount": 4
+  }'
+```
+
+**Response:**
+
+Returns a JSON response containing the optimal execution plan with orders to execute against the specified exchanges.
+

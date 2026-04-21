@@ -1,5 +1,10 @@
 <Solution>
   <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
     <File Path="order_books_data" />
   </Folder>
+  <Project Path="ConsoleApp/ConsoleApp.csproj" />
+  <Project Path="Shared/Shared.csproj" />
+  <Project Path="WebApplication/WebApplication.csproj" />
 </Solution>

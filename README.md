@@ -25,6 +25,17 @@ Implement a Web service (Kestrel, .NET API), and expose the implemented function
 
 Deploy your Web service locally with Docker.
 
+## Implementation Approach
+
+This solution is developed with the following principles in mind:
+
+- **Assumption of Valid Data**: The implementation assumes that all input data will be valid. Error handling for invalid data formats or ranges is not included, as the focus is on solving the core business problem.
+- **KISS (Keep It Simple, Stupid)**: The code is intentionally kept as simple as possible. Complex abstractions and unnecessary patterns are avoided in favor of clarity and directness.
+- **YAGNI (You Aren't Gonna Need It)**: Only features that are explicitly required by the task are implemented. No speculative or "nice-to-have" functionality is added.
+- **Focus on Business Logic**: The primary goal is to understand and correctly implement the business requirements, not to demonstrate advanced architectural patterns or techniques.
+
+This approach ensures the solution remains focused on solving the core problem at hand while remaining easy to understand and maintain.
+
 ## Solution
 
 ### ConsoleApp

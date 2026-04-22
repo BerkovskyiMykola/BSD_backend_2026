@@ -47,8 +47,8 @@ app.MapPost("/execution-plan", (
 
     var result = request.OrderType switch
     {
-        OrderType.Buy => buyBuilder.Build(settings.Balances, request.TargetAmount),
-        OrderType.Sell => sellBuilder.Build(request.TargetAmount),
+        OrderType.Buy => buyBuilder.Build(settings.EurBalances, request.TargetAmount),
+        OrderType.Sell => sellBuilder.Build(settings.BtcBalances, request.TargetAmount),
         _ => throw new UnreachableException()
     };
 
@@ -78,7 +78,8 @@ internal sealed record ExecutionPlanRequest(
 
 internal sealed record AppSettings(
     int Take,
-    IReadOnlyDictionary<int, decimal> Balances);
+    IReadOnlyDictionary<int, decimal> EurBalances,
+    IReadOnlyDictionary<int, decimal> BtcBalances);
 
 internal enum OrderType
 {

@@ -38,10 +38,15 @@ The application is configured via `appsettings.json`.
   "Take": 3,
   "OrderType": "Buy",
   "TargetAmount": 4,
-  "Balances": {
+  "EurBalances": {
     "1": 10000,
     "2": 5000,
     "3": 2050
+  },
+  "BtcBalances": {
+    "1": 5,
+    "2": 4,
+    "3": 3
   }
 }
 ```
@@ -55,18 +60,24 @@ The application is configured via `appsettings.json`.
 ##### **OrderType**
 - **Type:** `string` (`Buy | Sell`)  
 - **Description:**  
-  - **Buy** – builds an buy execution plan.  
-  - **Sell** – builds an sell execution plan using bids.
+  - **Buy** – builds a buy execution plan.  
+  - **Sell** – builds a sell execution plan using bids.
 
 ##### **TargetAmount**
 - **Type:** `decimal`  
-- **Description:** The total amount to execute in the order plan.
+- **Description:** The total amount of BTC to execute in the order plan.
 
-##### **Balances**
+##### **EurBalances**
 - **Type:** `dictionary<int, decimal>`  
-- **Description:** Available user balances per cryptoexchange.  
+- **Description:** Available EUR balance per cryptoexchange.  
   - **Keys** represent cryptoexchange identifiers.  
   - **Values** represent available EUR balance.
+
+##### **BtcBalances**
+- **Type:** `dictionary<int, decimal>`  
+- **Description:** Available BTC balance per cryptoexchange.  
+  - **Keys** represent cryptoexchange identifiers.  
+  - **Values** represent available BTC balance.
 
 ### WebApplication
 
@@ -77,10 +88,15 @@ The application is configured via `appsettings.json`.
 ```json
 {
   "Take": 3,
-  "Balances": {
+  "EurBalances": {
     "1": 10000,
     "2": 5000,
     "3": 2050
+  },
+  "BtcBalances": {
+    "1": 5,
+    "2": 4,
+    "3": 3
   }
 }
 ```
@@ -91,11 +107,17 @@ The application is configured via `appsettings.json`.
 - **Type:** `int`  
 - **Description:** Limits how many order book levels are loaded from the data source.
 
-##### **Balances**
+##### **EurBalances**
 - **Type:** `dictionary<int, decimal>`  
-- **Description:** Available user balances per cryptoexchange.  
+- **Description:** Available EUR balance per cryptoexchange.  
   - **Keys** represent cryptoexchange identifiers.  
   - **Values** represent available EUR balance.
+
+##### **BtcBalances**
+- **Type:** `dictionary<int, decimal>`  
+- **Description:** Available BTC balance per cryptoexchange.  
+  - **Keys** represent cryptoexchange identifiers.  
+  - **Values** represent available BTC balance.
 
 #### Endpoints
 

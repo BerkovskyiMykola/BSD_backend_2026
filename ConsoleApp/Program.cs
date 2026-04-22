@@ -17,10 +17,10 @@ var (bids, asks) = await ExchangeLoader.LoadFlatAsync(
 ExecutionPlanResult executionPlanResult = appSettings.OrderType switch
 {
     OrderType.Buy => new BuyExecutionPlanBuilder(asks)
-        .Build(appSettings.Balances, appSettings.TargetAmount),
+        .Build(appSettings.EurBalances, appSettings.TargetAmount),
 
     OrderType.Sell => new SellExecutionPlanBuilder(bids)
-        .Build(appSettings.TargetAmount),
+        .Build(appSettings.BtcBalances, appSettings.TargetAmount),
 
     _ => throw new UnreachableException("Unsupported order type")
 };
@@ -50,7 +50,8 @@ internal sealed record AppSettings(
     int Take,
     OrderType OrderType,
     decimal TargetAmount,
-    IReadOnlyDictionary<int, decimal> Balances);
+    IReadOnlyDictionary<int, decimal> EurBalances,
+    IReadOnlyDictionary<int, decimal> BtcBalances);
 
 internal enum OrderType
 {
